@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+    int atoi(string str) {
+        
+        int sum=0;
+        int j=str.length()-1;
+        if(str[0]!='-'){
+        for(int i=0;i<str.length();i++)
+        {  if(str[j]>=48 && str[j]<=57) 
+           sum+=(str[j]-48)*pow(10,i);
+            else
+            return -1;
+            j--;
+        }
+        }
+        else
+        {
+             for(int i=1;i<str.length();i++)
+        {  if(str[j]>=48 && str[j]<=57) 
+           sum+=(str[j]-48)*pow(10,i-1);
+            else
+            return -1;
+            j--;
+        }
+        sum=sum*-1;
+        }
+    return sum;    
+        
+    }
+    int main()
+    { string s;
+    getline(cin,s);
+    cout<<atoi(s);
+    return 0;
+    }
