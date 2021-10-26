@@ -1,0 +1,73 @@
+// { Driver Code Starts
+//Initial function template for C++
+
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+//User function template for C++
+
+class Solution{
+    public:
+    void swap(int *a,int *b)
+    {
+        int t=*a;
+        *a=*b;
+        *b=t;
+    }
+    int part(int arr[],int l,int r)
+    {
+     int ind=rand()%(r-l+1);
+     swap(&arr[l+ind],&arr[r]);
+     int piv=arr[r];
+     int i=l-1,j;
+     for(j=l;j<=r-1;j++)
+     {
+         if(arr[j]<piv)
+         {
+             i++;
+             swap(&arr[j],&arr[i]);
+         }
+     }
+     swap(&arr[i+1],&arr[r]);
+     return i+1;
+    }
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int kthSmallest(int arr[], int l, int r, int k) {
+        //code here
+        int ind;
+        ind=part(arr,l,r);
+            if(ind-l==(k-1))
+            return arr[ind];
+            else if(ind-l<(k-1))
+            return kthSmallest(arr,ind+1,r,k-ind+l-1);
+            else
+            return kthSmallest(arr,l,ind-1,k);
+    }
+};
+
+// { Driver Code Starts.
+ 
+int main()
+{
+    int test_case;
+    cin>>test_case;
+    while(test_case--)
+    {
+        int number_of_elements;
+        cin>>number_of_elements;
+        int a[number_of_elements];
+        
+        for(int i=0;i<number_of_elements;i++)
+            cin>>a[i];
+            
+        int k;
+        cin>>k;
+        Solution ob;
+        cout<<ob.kthSmallest(a, 0, number_of_elements-1, k)<<endl;
+    }
+    return 0;
+}  // } Driver Code Ends
